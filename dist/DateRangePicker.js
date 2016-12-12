@@ -154,9 +154,11 @@ var DateRangePicker = _react2.default.createClass({
 
       if (!isNewValueVisible) {
         var yearMonth = (0, _getYearMonth.getYearMonthProps)(nextProps);
-
-        updatedState.year = yearMonth.year;
-        updatedState.month = yearMonth.month;
+        
+        if (yearMonth && yearMonth.year && yearMonth.month) {
+          updatedState.year = yearMonth.year;
+          updatedState.month = yearMonth.month;
+        }
       }
     }
 
