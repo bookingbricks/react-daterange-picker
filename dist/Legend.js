@@ -60,7 +60,7 @@ var Legend = _react2.default.createClass({
     return _react2.default.createElement(
       'ul',
       { className: this.cx() },
-      _react2.default.createElement(
+      selectedLabel && _react2.default.createElement(
         'li',
         { className: this.cx({ element: 'LegendItem' }) },
         _react2.default.createElement('span', { className: this.cx({ element: 'LegendItemColor', modifiers: { 'selection': true } }) }),

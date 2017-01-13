@@ -165,7 +165,7 @@ var CalendarMonth = _react2.default.createClass({
         _react2.default.createElement(
           'abbr',
           { title: weekday[0] },
-          weekday[1]
+          weekday[1].charAt(0).toUpperCase() + weekday[1].slice(1)
         )
       );
     }.bind(this));
@@ -242,7 +242,7 @@ var CalendarMonth = _react2.default.createClass({
     return _react2.default.createElement(
       'option',
       { key: month, value: i, disabled: disabled ? 'disabled' : null },
-      month
+      month.charAt(0).toUpperCase() + month.slice(1)
     );
   },
   renderHeaderMonth: function renderHeaderMonth() {
@@ -254,7 +254,7 @@ var CalendarMonth = _react2.default.createClass({
     return _react2.default.createElement(
       'span',
       { className: this.cx({ element: 'MonthHeaderLabel', modifiers: modifiers }) },
-      firstOfMonth.locale(this.props.locale).format('MMMM'),
+      firstOfMonth.locale(this.props.locale).format('MMMM').charAt(0).toUpperCase() + firstOfMonth.locale(this.props.locale).format('MMMM').slice(1),
       this.props.disableNavigation ? null : _react2.default.createElement(
         'select',
         { className: this.cx({ element: 'MonthHeaderSelect' }), value: firstOfMonth.month(), onChange: this.handleMonthChange },
