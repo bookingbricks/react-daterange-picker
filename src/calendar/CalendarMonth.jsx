@@ -107,7 +107,7 @@ const CalendarMonth = React.createClass({
     let headers = indices.map(function(index) {
       let weekday = this.WEEKDAYS.get(index);
       return (
-        <th style={style} className={this.cx({element: 'WeekdayHeading'})} key={weekday} scope="col"><abbr title={weekday[0]}>{weekday[1]}</abbr></th>
+        <th style={style} className={this.cx({element: 'WeekdayHeading'})} key={weekday} scope="col"><abbr title={weekday[0]}>{weekday[1].charAt(0).toUpperCase() + weekday[1].slice(1)}</abbr></th>
       );
     }.bind(this));
 
@@ -171,7 +171,7 @@ const CalendarMonth = React.createClass({
     }
 
     return (
-      <option key={month} value={i} disabled={disabled ? 'disabled' : null}>{month}</option>
+      <option key={month} value={i} disabled={disabled ? 'disabled' : null}>{month.charAt(0).toUpperCase() + month.slice(1)}</option>
     );
   },
 
@@ -182,7 +182,7 @@ const CalendarMonth = React.createClass({
 
     return (
       <span className={this.cx({element: 'MonthHeaderLabel', modifiers})}>
-        {firstOfMonth.locale(this.props.locale).format('MMMM')}
+        {firstOfMonth.locale(this.props.locale).format('MMMM').charAt(0).toUpperCase() + firstOfMonth.locale(this.props.locale).format('MMMM').slice(1)}
         {this.props.disableNavigation ? null : <select className={this.cx({element: 'MonthHeaderSelect'})} value={firstOfMonth.month()} onChange={this.handleMonthChange}>{choices.toJS()}</select>}
       </span>
     );
