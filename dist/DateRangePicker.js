@@ -579,7 +579,6 @@ var DateRangePicker = _react2.default.createClass({
 
 
   render: function render() {
-    console.log(this.state, this.props);
     var _props3 = this.props,
         PaginationArrowComponent = _props3.paginationArrowComponent,
         className = _props3.className,
