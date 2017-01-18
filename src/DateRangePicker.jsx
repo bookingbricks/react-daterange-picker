@@ -406,7 +406,7 @@ const DateRangePicker = React.createClass({
 
     if (this.canMoveBack()) {
       monthDate = this.getMonthDate();
-      monthDate.subtract(1, 'months');
+      monthDate.subtract(this.props.numberOfCalendars, 'months');
       this.setState(getYearMonth(monthDate));
     }
   },
@@ -423,7 +423,7 @@ const DateRangePicker = React.createClass({
 
     if (this.canMoveForward()) {
       monthDate = this.getMonthDate();
-      monthDate.add(1, 'months');
+      monthDate.add(this.props.numberOfCalendars, 'months');
       this.setState(getYearMonth(monthDate));
     }
   },
