@@ -258,6 +258,7 @@ const Index = React.createClass({
               showLegend={true}
               showWeekNumber={true}
               weekNumberLabel="w."
+              disableSelect={true}
               />
             <CodeSnippet language="javascript">
               {processCodeSnippet(mainCodeSnippet)}
