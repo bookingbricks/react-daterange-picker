@@ -1,7 +1,5 @@
 import React from 'react';
-import moment from 'moment';
-import 'moment-range';
-import calendar from 'calendar';
+import moment from '../moment';
 import Immutable from 'immutable';
 
 import BemMixin from '../utils/BemMixin';
@@ -196,11 +194,29 @@ const CalendarMonth = React.createClass({
     );
   },
 
+  calendar(firstOfWeek, firstOfMonth) {
+    const start = moment(firstOfMonth.startOf('month')).startOf('week');
+    const end = moment(firstOfMonth.endOf('month')).endOf('week');
+    const range = moment.range(
+      start,
+      end
+    );
+    const array = [];
+    let week = [];
+    range.by('day', (day) => {
+      week.push(day);
+      if (week.length === 7) {
+        array.push(week);
+        week = [];
+      }
+    });
+    return array;
+  },
+
   render() {
     let {firstOfWeek, firstOfMonth} = this.props;
 
-    let cal = new calendar.Calendar(firstOfWeek);
-    let monthDates = Immutable.fromJS(cal.monthDates(firstOfMonth.year(), firstOfMonth.month()));
+    let monthDates = Immutable.fromJS(this.calendar(firstOfWeek, firstOfMonth));
     let weeks = monthDates.map(this.renderWeek);
 
     return (

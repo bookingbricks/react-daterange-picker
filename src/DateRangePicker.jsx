@@ -1,6 +1,5 @@
 import React from 'react';
-import moment from 'moment';
-import {} from 'moment-range';
+import moment from './moment';
 import Immutable from 'immutable';
 import calendar from 'calendar';
 
@@ -62,8 +61,8 @@ const DateRangePicker = React.createClass({
   },
 
   getDefaultProps() {
-    let date = new Date();
-    let initialDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
+    let date = moment();
+    let initialDate = date.format('YYYY-MM-DD');
 
     return {
       bemNamespace: null,
@@ -92,6 +91,7 @@ const DateRangePicker = React.createClass({
       showLegend: false,
       onSelect: noop,
       paginationArrowComponent: PaginationArrow,
+      timezone: moment().tz(),
     };
   },
 
@@ -122,10 +122,10 @@ const DateRangePicker = React.createClass({
   },
 
   getInitialState() {
-    let now = new Date();
+    let now = moment();
     let {initialYear, initialMonth, initialFromValue, value} = this.props;
-    let year = now.getFullYear();
-    let month = now.getMonth();
+    let year = now.year();
+    let month = now.month();
 
     if (initialYear && initialMonth) {
       year = initialYear;
@@ -371,7 +371,7 @@ const DateRangePicker = React.createClass({
   },
 
   getMonthDate() {
-    return moment(new Date(this.state.year, this.state.month, 1));
+    return moment().year(this.state.year).month(this.state.month).startOf('month');
   },
 
   isStartOrEndVisible(props) {
