@@ -4,11 +4,9 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _moment2 = require('moment');
+var _moment2 = require('../moment');
 
 var _moment3 = _interopRequireDefault(_moment2);
-
-require('moment-range');
 
 var _isMomentRange = require('./isMomentRange');
 

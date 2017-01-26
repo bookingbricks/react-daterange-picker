@@ -10,15 +10,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _moment = require('moment');
+var _moment = require('../moment');
 
 var _moment2 = _interopRequireDefault(_moment);
-
-require('moment-range');
-
-var _calendar = require('calendar');
-
-var _calendar2 = _interopRequireDefault(_calendar);
 
 var _immutable = require('immutable');
 
@@ -271,14 +265,28 @@ var CalendarMonth = _react2.default.createClass({
       this.renderHeaderYear()
     );
   },
+  calendar: function calendar(firstOfWeek, firstOfMonth) {
+    var start = (0, _moment2.default)(firstOfMonth.startOf('month')).startOf('week');
+    var end = (0, _moment2.default)(firstOfMonth.endOf('month')).endOf('week');
+    var range = _moment2.default.range(start, end);
+    var array = [];
+    var week = [];
+    range.by('day', function (day) {
+      week.push(day);
+      if (week.length === 7) {
+        array.push(week);
+        week = [];
+      }
+    });
+    return array;
+  },
   render: function render() {
     var _props5 = this.props,
         firstOfWeek = _props5.firstOfWeek,
         firstOfMonth = _props5.firstOfMonth;
 
 
-    var cal = new _calendar2.default.Calendar(firstOfWeek);
-    var monthDates = _immutable2.default.fromJS(cal.monthDates(firstOfMonth.year(), firstOfMonth.month()));
+    var monthDates = _immutable2.default.fromJS(this.calendar(firstOfWeek, firstOfMonth));
     var weeks = monthDates.map(this.renderWeek);
 
     return _react2.default.createElement(

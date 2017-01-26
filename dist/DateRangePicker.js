@@ -8,11 +8,9 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
-var _moment = require('moment');
+var _moment = require('./moment');
 
 var _moment2 = _interopRequireDefault(_moment);
-
-require('moment-range');
 
 var _immutable = require('immutable');
 
@@ -81,14 +79,14 @@ var DateRangePicker = _react2.default.createClass({
     disableNavigation: _react2.default.PropTypes.bool,
     firstOfWeek: _react2.default.PropTypes.oneOf([0, 1, 2, 3, 4, 5, 6]),
     helpMessage: _react2.default.PropTypes.string,
-    initialDate: _react2.default.PropTypes.instanceOf(Date),
+    initialDate: _CustomPropTypes2.default.moment,
     initialFromValue: _react2.default.PropTypes.bool,
     initialMonth: _react2.default.PropTypes.number, // Overrides values derived from initialDate/initialRange
     initialRange: _react2.default.PropTypes.object,
     initialYear: _react2.default.PropTypes.number, // Overrides values derived from initialDate/initialRange
     locale: _react2.default.PropTypes.string,
-    maximumDate: _react2.default.PropTypes.instanceOf(Date),
-    minimumDate: _react2.default.PropTypes.instanceOf(Date),
+    maximumDate: _CustomPropTypes2.default.moment,
+    minimumDate: _CustomPropTypes2.default.moment,
     numberOfCalendars: _react2.default.PropTypes.number,
     onHighlightDate: _react2.default.PropTypes.func, // triggered when a date is highlighted (hovered)
     onHighlightRange: _react2.default.PropTypes.func, // triggered when a range is highlighted (hovered)
@@ -107,9 +105,6 @@ var DateRangePicker = _react2.default.createClass({
   },
 
   getDefaultProps: function getDefaultProps() {
-    var date = new Date();
-    var initialDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-
     return {
       bemNamespace: null,
       bemBlock: 'DateRangePicker',
@@ -119,7 +114,7 @@ var DateRangePicker = _react2.default.createClass({
       disableNavigation: false,
       nextLabel: '',
       previousLabel: '',
-      initialDate: initialDate,
+      initialDate: (0, _moment2.default)(),
       initialFromValue: true,
       locale: (0, _moment2.default)().locale(),
       selectionType: 'range',
@@ -136,7 +131,8 @@ var DateRangePicker = _react2.default.createClass({
       dateStates: [],
       showLegend: false,
       onSelect: noop,
-      paginationArrowComponent: _PaginationArrow2.default
+      paginationArrowComponent: _PaginationArrow2.default,
+      timezone: (0, _moment2.default)().tz()
     };
   },
   componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
@@ -165,15 +161,15 @@ var DateRangePicker = _react2.default.createClass({
     this.setState(updatedState);
   },
   getInitialState: function getInitialState() {
-    var now = new Date();
+    var now = (0, _moment2.default)();
     var _props = this.props,
         initialYear = _props.initialYear,
         initialMonth = _props.initialMonth,
         initialFromValue = _props.initialFromValue,
         value = _props.value;
 
-    var year = now.getFullYear();
-    var month = now.getMonth();
+    var year = now.year();
+    var month = now.month();
 
     if (initialYear && initialMonth) {
       year = initialYear;
@@ -420,7 +416,7 @@ var DateRangePicker = _react2.default.createClass({
     }
   },
   getMonthDate: function getMonthDate() {
-    return (0, _moment2.default)(new Date(this.state.year, this.state.month, 1));
+    return (0, _moment2.default)().year(this.state.year).month(this.state.month).startOf('month');
   },
   isStartOrEndVisible: function isStartOrEndVisible(props) {
     var _this = this;

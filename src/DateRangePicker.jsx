@@ -35,14 +35,14 @@ const DateRangePicker = React.createClass({
     disableNavigation: React.PropTypes.bool,
     firstOfWeek: React.PropTypes.oneOf([0, 1, 2, 3, 4, 5, 6]),
     helpMessage: React.PropTypes.string,
-    initialDate: React.PropTypes.instanceOf(Date),
+    initialDate: CustomPropTypes.moment,
     initialFromValue: React.PropTypes.bool,
     initialMonth: React.PropTypes.number, // Overrides values derived from initialDate/initialRange
     initialRange: React.PropTypes.object,
     initialYear: React.PropTypes.number, // Overrides values derived from initialDate/initialRange
     locale: React.PropTypes.string,
-    maximumDate: React.PropTypes.instanceOf(Date),
-    minimumDate: React.PropTypes.instanceOf(Date),
+    maximumDate: CustomPropTypes.moment,
+    minimumDate: CustomPropTypes.moment,
     numberOfCalendars: React.PropTypes.number,
     onHighlightDate: React.PropTypes.func, // triggered when a date is highlighted (hovered)
     onHighlightRange: React.PropTypes.func, // triggered when a range is highlighted (hovered)
@@ -61,9 +61,6 @@ const DateRangePicker = React.createClass({
   },
 
   getDefaultProps() {
-    let date = moment();
-    let initialDate = date.format('YYYY-MM-DD');
-
     return {
       bemNamespace: null,
       bemBlock: 'DateRangePicker',
@@ -73,7 +70,7 @@ const DateRangePicker = React.createClass({
       disableNavigation: false,
       nextLabel: '',
       previousLabel: '',
-      initialDate: initialDate,
+      initialDate: moment(),
       initialFromValue: true,
       locale: moment().locale(),
       selectionType: 'range',

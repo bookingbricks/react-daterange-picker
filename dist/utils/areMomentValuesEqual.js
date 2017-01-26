@@ -13,10 +13,8 @@ exports.default = function (previousValue, nextValue) {
   return previousValue.isSame(nextValue);
 };
 
-var _moment = require('moment');
+var _moment = require('../moment');
 
 var _moment2 = _interopRequireDefault(_moment);
-
-require('moment-range');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
