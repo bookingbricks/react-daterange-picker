@@ -102,7 +102,8 @@ var DateRangePicker = _react2.default.createClass({
     stateDefinitions: _react2.default.PropTypes.object,
     value: _CustomPropTypes2.default.momentOrMomentRange,
     showWeekNumber: _react2.default.PropTypes.bool,
-    weekNumberLabel: _react2.default.PropTypes.string
+    weekNumberLabel: _react2.default.PropTypes.string,
+    disableSelect: _react2.default.PropTypes.bool
   },
 
   getDefaultProps: function getDefaultProps() {
@@ -571,7 +572,8 @@ var DateRangePicker = _react2.default.createClass({
       dateComponent: _CalendarDate2.default,
       locale: this.props.locale,
       showWeekNumber: this.props.showWeekNumber,
-      weekNumberLabel: this.props.weekNumberLabel
+      weekNumberLabel: this.props.weekNumberLabel,
+      disableSelect: this.props.disableSelect
     };
 
     return _react2.default.createElement(_CalendarMonth2.default, props);

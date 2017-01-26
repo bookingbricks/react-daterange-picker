@@ -184,7 +184,8 @@ var CalendarDate = _react2.default.createClass({
         isHighlightedDate = _props3.isHighlightedDate,
         isHighlightedRangeStart = _props3.isHighlightedRangeStart,
         isHighlightedRangeEnd = _props3.isHighlightedRangeEnd,
-        isInHighlightedRange = _props3.isInHighlightedRange;
+        isInHighlightedRange = _props3.isInHighlightedRange,
+        disableSelect = _props3.disableSelect;
 
 
     var bemModifiers = this.getBemModifiers();
@@ -243,18 +244,14 @@ var CalendarDate = _react2.default.createClass({
       }
     }
 
-    if (this.props.showWeekNumber) {
-      cellStyle.width = '12.5%';
-    }
-
     return _react2.default.createElement(
       'td',
       { className: this.cx({ element: 'Date', modifiers: bemModifiers, states: bemStates }),
         style: cellStyle,
-        onTouchStart: this.touchStart,
-        onMouseEnter: this.mouseEnter,
-        onMouseLeave: this.mouseLeave,
-        onMouseDown: this.mouseDown },
+        onTouchStart: !disableSelect && this.touchStart,
+        onMouseEnter: !disableSelect && this.mouseEnter,
+        onMouseLeave: !disableSelect && this.mouseLeave,
+        onMouseDown: !disableSelect && this.mouseDown },
       numStates > 1 && _react2.default.createElement(
         'div',
         { className: this.cx({ element: "HalfDateStates" }) },
