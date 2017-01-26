@@ -1,7 +1,6 @@
 import React from 'react';
 import moment from './moment';
 import Immutable from 'immutable';
-import calendar from 'calendar';
 
 import BemMixin from './utils/BemMixin';
 import CustomPropTypes from './utils/CustomPropTypes';
@@ -13,6 +12,7 @@ import CalendarDate from './calendar/CalendarDate';
 import PaginationArrow from './PaginationArrow';
 
 import isMomentRange from './utils/isMomentRange';
+import Calendar from './utils/Calendar';
 import hasUpdatedValue from './utils/hasUpdatedValue';
 import { getYearMonth, getYearMonthProps } from './utils/getYearMonth';
 
@@ -471,11 +471,8 @@ const DateRangePicker = React.createClass({
     let month = monthDate.month();
     let key = `${ index}-${ year }-${ month }`;
     let props;
-
-    monthDate.add(index, 'months');
-
-    let cal = new calendar.Calendar(firstOfWeek);
-    let monthDates = Immutable.fromJS(cal.monthDates(monthDate.year(), monthDate.month()));
+    monthDate = monthDate.add(index, 'months');
+    let monthDates = Immutable.fromJS(Calendar(monthDate));
     let monthStart = monthDates.first().first();
     let monthEnd = monthDates.last().last();
     let monthRange = moment.range(monthStart, monthEnd);

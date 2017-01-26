@@ -34,6 +34,10 @@ var _PureRenderMixin = require('../utils/PureRenderMixin');
 
 var _PureRenderMixin2 = _interopRequireDefault(_PureRenderMixin);
 
+var _Calendar = require('../utils/Calendar');
+
+var _Calendar2 = _interopRequireDefault(_Calendar);
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
@@ -265,28 +269,13 @@ var CalendarMonth = _react2.default.createClass({
       this.renderHeaderYear()
     );
   },
-  calendar: function calendar(firstOfWeek, firstOfMonth) {
-    var start = (0, _moment2.default)(firstOfMonth.startOf('month')).startOf('week');
-    var end = (0, _moment2.default)(firstOfMonth.endOf('month')).endOf('week');
-    var range = _moment2.default.range(start, end);
-    var array = [];
-    var week = [];
-    range.by('day', function (day) {
-      week.push(day);
-      if (week.length === 7) {
-        array.push(week);
-        week = [];
-      }
-    });
-    return array;
-  },
   render: function render() {
     var _props5 = this.props,
         firstOfWeek = _props5.firstOfWeek,
         firstOfMonth = _props5.firstOfMonth;
 
 
-    var monthDates = _immutable2.default.fromJS(this.calendar(firstOfWeek, firstOfMonth));
+    var monthDates = _immutable2.default.fromJS((0, _Calendar2.default)(firstOfMonth));
     var weeks = monthDates.map(this.renderWeek);
 
     return _react2.default.createElement(

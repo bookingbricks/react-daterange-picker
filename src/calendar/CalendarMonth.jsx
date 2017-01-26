@@ -6,6 +6,7 @@ import BemMixin from '../utils/BemMixin';
 import CustomPropTypes from '../utils/CustomPropTypes';
 import isMomentRange from '../utils/isMomentRange';
 import PureRenderMixin from '../utils/PureRenderMixin';
+import Calendar from '../utils/Calendar';
 
 const CalendarMonth = React.createClass({
   mixins: [BemMixin, PureRenderMixin],
@@ -194,29 +195,10 @@ const CalendarMonth = React.createClass({
     );
   },
 
-  calendar(firstOfWeek, firstOfMonth) {
-    const start = moment(firstOfMonth.startOf('month')).startOf('week');
-    const end = moment(firstOfMonth.endOf('month')).endOf('week');
-    const range = moment.range(
-      start,
-      end
-    );
-    const array = [];
-    let week = [];
-    range.by('day', (day) => {
-      week.push(day);
-      if (week.length === 7) {
-        array.push(week);
-        week = [];
-      }
-    });
-    return array;
-  },
-
   render() {
     let {firstOfWeek, firstOfMonth} = this.props;
 
-    let monthDates = Immutable.fromJS(this.calendar(firstOfWeek, firstOfMonth));
+    let monthDates = Immutable.fromJS(Calendar(firstOfMonth));
     let weeks = monthDates.map(this.renderWeek);
 
     return (

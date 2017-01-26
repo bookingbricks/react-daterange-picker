@@ -16,10 +16,6 @@ var _immutable = require('immutable');
 
 var _immutable2 = _interopRequireDefault(_immutable);
 
-var _calendar = require('calendar');
-
-var _calendar2 = _interopRequireDefault(_calendar);
-
 var _BemMixin = require('./utils/BemMixin');
 
 var _BemMixin2 = _interopRequireDefault(_BemMixin);
@@ -47,6 +43,10 @@ var _PaginationArrow2 = _interopRequireDefault(_PaginationArrow);
 var _isMomentRange = require('./utils/isMomentRange');
 
 var _isMomentRange2 = _interopRequireDefault(_isMomentRange);
+
+var _Calendar = require('./utils/Calendar');
+
+var _Calendar2 = _interopRequireDefault(_Calendar);
 
 var _hasUpdatedValue = require('./utils/hasUpdatedValue');
 
@@ -517,11 +517,8 @@ var DateRangePicker = _react2.default.createClass({
     var month = monthDate.month();
     var key = index + '-' + year + '-' + month;
     var props = void 0;
-
-    monthDate.add(index, 'months');
-
-    var cal = new _calendar2.default.Calendar(firstOfWeek);
-    var monthDates = _immutable2.default.fromJS(cal.monthDates(monthDate.year(), monthDate.month()));
+    monthDate = monthDate.add(index, 'months');
+    var monthDates = _immutable2.default.fromJS((0, _Calendar2.default)(monthDate));
     var monthStart = monthDates.first().first();
     var monthEnd = monthDates.last().last();
     var monthRange = _moment2.default.range(monthStart, monthEnd);
