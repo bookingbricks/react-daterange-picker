@@ -159,6 +159,7 @@ const CalendarDate = React.createClass({
       isHighlightedRangeStart,
       isHighlightedRangeEnd,
       isInHighlightedRange,
+      disableSelect,
     } = this.props;
 
     let bemModifiers = this.getBemModifiers();
@@ -221,10 +222,10 @@ const CalendarDate = React.createClass({
     return (
       <td className={this.cx({element: 'Date', modifiers: bemModifiers, states: bemStates})}
         style={cellStyle}
-        onTouchStart={this.touchStart}
-        onMouseEnter={this.mouseEnter}
-        onMouseLeave={this.mouseLeave}
-        onMouseDown={this.mouseDown}>
+        onTouchStart={!disableSelect && this.touchStart}
+        onMouseEnter={!disableSelect && this.mouseEnter}
+        onMouseLeave={!disableSelect && this.mouseLeave}
+        onMouseDown={!disableSelect && this.mouseDown}>
         {numStates > 1 &&
           <div className={this.cx({element: "HalfDateStates"})}>
             <CalendarDatePeriod period="am" color={amColor} />

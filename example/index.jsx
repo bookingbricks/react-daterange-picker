@@ -249,13 +249,17 @@ const Index = React.createClass({
               firstOfWeek={1}
               numberOfCalendars={2}
               selectionType='range'
-              minimumDate={new Date()}
-              maximumDate={moment().add(2, 'years').toDate()}
+              minimumDate={moment()}
+              maximumDate={moment().add(2, 'years')}
               stateDefinitions={stateDefinitions}
               dateStates={dateRanges}
               defaultState="available"
               value={moment.range(initialStart, initialEnd)}
               showLegend={true}
+              showWeekNumber={true}
+              weekNumberLabel="w."
+              // disableSelect={true}
+              timezone={'Europe/Stockholm'}
               />
             <CodeSnippet language="javascript">
               {processCodeSnippet(mainCodeSnippet)}
@@ -273,7 +277,7 @@ const Index = React.createClass({
               <DatePickerRange
                 numberOfCalendars={2}
                 selectionType="range"
-                minimumDate={new Date()} />
+                minimumDate={moment()} />
             </div>
 
             <div className="example">
@@ -282,7 +286,7 @@ const Index = React.createClass({
                 numberOfCalendars={2}
                 selectionType="range"
                 singleDateRange={true}
-                minimumDate={new Date()} />
+                minimumDate={moment()} />
             </div>
 
             <div className="example">
@@ -290,7 +294,7 @@ const Index = React.createClass({
               <DatePickerSingle
                 numberOfCalendars={2}
                 selectionType="single"
-                minimumDate={new Date()} />
+                minimumDate={moment()} />
             </div>
 
             <div className="example">
@@ -310,7 +314,7 @@ const Index = React.createClass({
                 locale={this.state.locale}
                 numberOfCalendars={2}
                 selectionType="range"
-                minimumDate={new Date()} />
+                minimumDate={moment()} />
               <CodeSnippet language="javascript">
                 {processCodeSnippet(i18nCodeSnippet)}
               </CodeSnippet>

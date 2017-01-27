@@ -1,13 +1,12 @@
 import React from 'react';
-import moment from 'moment';
-import 'moment-range';
-import calendar from 'calendar';
+import moment from '../moment';
 import Immutable from 'immutable';
 
 import BemMixin from '../utils/BemMixin';
 import CustomPropTypes from '../utils/CustomPropTypes';
 import isMomentRange from '../utils/isMomentRange';
 import PureRenderMixin from '../utils/PureRenderMixin';
+import Calendar from '../utils/Calendar';
 
 const CalendarMonth = React.createClass({
   mixins: [BemMixin, PureRenderMixin],
@@ -25,6 +24,8 @@ const CalendarMonth = React.createClass({
     onYearChange: React.PropTypes.func,
     value: CustomPropTypes.momentOrMomentRange,
     locale: React.PropTypes.string,
+    showWeekNumber: React.PropTypes.bool,
+    weekNumberLabel: React.PropTypes.string,
   },
 
   setLocale(locale) {
@@ -82,25 +83,38 @@ const CalendarMonth = React.createClass({
   },
 
   renderWeek(dates, i) {
+    const {showWeekNumber, weekNumberLabel} = this.props;
+    const weekNumber = moment(dates.get(0)).week();
+
     let days = dates.map(this.renderDay);
     return (
-      <tr className={this.cx({element: 'Week'})} key={i}>{days.toJS()}</tr>
+      <tr className={this.cx({element: 'Week'})} key={i}>
+        {(showWeekNumber && weekNumber) ? <td className={this.cx({element: 'WeekNumber'})}>
+          <span className={this.cx({element: 'weekNumberLabel'})}>{weekNumberLabel}{weekNumber}</span>
+        </td> : null}
+        {days.toJS()}
+      </tr>
     );
   },
 
   renderDayHeaders() {
-    let {firstOfWeek} = this.props;
+    let {firstOfWeek, showWeekNumber} = this.props;
     let indices = Immutable.Range(firstOfWeek, 7).concat(Immutable.Range(0, firstOfWeek));
+
+    const style = (showWeekNumber) ? { width: '12.5%' } : null;
 
     let headers = indices.map(function(index) {
       let weekday = this.WEEKDAYS.get(index);
       return (
-        <th className={this.cx({element: 'WeekdayHeading'})} key={weekday} scope="col"><abbr title={weekday[0]}>{weekday[1]}</abbr></th>
+        <th style={style} className={this.cx({element: 'WeekdayHeading'})} key={weekday} scope="col"><abbr title={weekday[0]}>{weekday[1].charAt(0).toUpperCase() + weekday[1].slice(1)}</abbr></th>
       );
     }.bind(this));
 
     return (
-      <tr className={this.cx({element: 'Weekdays'})}>{headers.toJS()}</tr>
+      <tr className={this.cx({element: 'Weekdays'})}>
+        {(showWeekNumber) ? <th style={style} className={this.cx({element: 'WeekdayHeading'})} scope="col"><abbr></abbr></th> : null}
+        {headers.toJS()}
+      </tr>
     );
   },
 
@@ -156,7 +170,7 @@ const CalendarMonth = React.createClass({
     }
 
     return (
-      <option key={month} value={i} disabled={disabled ? 'disabled' : null}>{month}</option>
+      <option key={month} value={i} disabled={disabled ? 'disabled' : null}>{month.charAt(0).toUpperCase() + month.slice(1)}</option>
     );
   },
 
@@ -167,7 +181,7 @@ const CalendarMonth = React.createClass({
 
     return (
       <span className={this.cx({element: 'MonthHeaderLabel', modifiers})}>
-        {firstOfMonth.locale(this.props.locale).format('MMMM')}
+        {firstOfMonth.locale(this.props.locale).format('MMMM').charAt(0).toUpperCase() + firstOfMonth.locale(this.props.locale).format('MMMM').slice(1)}
         {this.props.disableNavigation ? null : <select className={this.cx({element: 'MonthHeaderSelect'})} value={firstOfMonth.month()} onChange={this.handleMonthChange}>{choices.toJS()}</select>}
       </span>
     );
@@ -184,8 +198,7 @@ const CalendarMonth = React.createClass({
   render() {
     let {firstOfWeek, firstOfMonth} = this.props;
 
-    let cal = new calendar.Calendar(firstOfWeek);
-    let monthDates = Immutable.fromJS(cal.monthDates(firstOfMonth.year(), firstOfMonth.month()));
+    let monthDates = Immutable.fromJS(Calendar(firstOfMonth));
     let weeks = monthDates.map(this.renderWeek);
 
     return (

@@ -1,8 +1,6 @@
 import React from 'react';
-import moment from 'moment';
-import {} from 'moment-range';
+import moment from './moment';
 import Immutable from 'immutable';
-import calendar from 'calendar';
 
 import BemMixin from './utils/BemMixin';
 import CustomPropTypes from './utils/CustomPropTypes';
@@ -14,6 +12,7 @@ import CalendarDate from './calendar/CalendarDate';
 import PaginationArrow from './PaginationArrow';
 
 import isMomentRange from './utils/isMomentRange';
+import Calendar from './utils/Calendar';
 import hasUpdatedValue from './utils/hasUpdatedValue';
 import { getYearMonth, getYearMonthProps } from './utils/getYearMonth';
 
@@ -36,14 +35,14 @@ const DateRangePicker = React.createClass({
     disableNavigation: React.PropTypes.bool,
     firstOfWeek: React.PropTypes.oneOf([0, 1, 2, 3, 4, 5, 6]),
     helpMessage: React.PropTypes.string,
-    initialDate: React.PropTypes.instanceOf(Date),
+    initialDate: CustomPropTypes.moment,
     initialFromValue: React.PropTypes.bool,
     initialMonth: React.PropTypes.number, // Overrides values derived from initialDate/initialRange
     initialRange: React.PropTypes.object,
     initialYear: React.PropTypes.number, // Overrides values derived from initialDate/initialRange
     locale: React.PropTypes.string,
-    maximumDate: React.PropTypes.instanceOf(Date),
-    minimumDate: React.PropTypes.instanceOf(Date),
+    maximumDate: CustomPropTypes.moment,
+    minimumDate: CustomPropTypes.moment,
     numberOfCalendars: React.PropTypes.number,
     onHighlightDate: React.PropTypes.func, // triggered when a date is highlighted (hovered)
     onHighlightRange: React.PropTypes.func, // triggered when a range is highlighted (hovered)
@@ -56,12 +55,12 @@ const DateRangePicker = React.createClass({
     showLegend: React.PropTypes.bool,
     stateDefinitions: React.PropTypes.object,
     value: CustomPropTypes.momentOrMomentRange,
+    showWeekNumber: React.PropTypes.bool,
+    weekNumberLabel: React.PropTypes.string,
+    disableSelect: React.PropTypes.bool,
   },
 
   getDefaultProps() {
-    let date = new Date();
-    let initialDate = new Date(date.getFullYear(), date.getMonth(), date.getDate());
-
     return {
       bemNamespace: null,
       bemBlock: 'DateRangePicker',
@@ -71,7 +70,7 @@ const DateRangePicker = React.createClass({
       disableNavigation: false,
       nextLabel: '',
       previousLabel: '',
-      initialDate: initialDate,
+      initialDate: moment(),
       initialFromValue: true,
       locale: moment().locale(),
       selectionType: 'range',
@@ -89,6 +88,7 @@ const DateRangePicker = React.createClass({
       showLegend: false,
       onSelect: noop,
       paginationArrowComponent: PaginationArrow,
+      timezone: moment().tz(),
     };
   },
 
@@ -108,9 +108,10 @@ const DateRangePicker = React.createClass({
 
       if (!isNewValueVisible) {
         const yearMonth = getYearMonthProps(nextProps);
-
-        updatedState.year = yearMonth.year;
-        updatedState.month = yearMonth.month;
+        if (yearMonth && yearMonth.year && yearMonth.month) {
+          updatedState.year = yearMonth.year;
+          updatedState.month = yearMonth.month;
+        }
       }
     }
 
@@ -118,10 +119,10 @@ const DateRangePicker = React.createClass({
   },
 
   getInitialState() {
-    let now = new Date();
+    let now = moment();
     let {initialYear, initialMonth, initialFromValue, value} = this.props;
-    let year = now.getFullYear();
-    let month = now.getMonth();
+    let year = now.year();
+    let month = now.month();
 
     if (initialYear && initialMonth) {
       year = initialYear;
@@ -367,7 +368,7 @@ const DateRangePicker = React.createClass({
   },
 
   getMonthDate() {
-    return moment(new Date(this.state.year, this.state.month, 1));
+    return moment().year(this.state.year).month(this.state.month).startOf('month');
   },
 
   isStartOrEndVisible(props) {
@@ -385,7 +386,10 @@ const DateRangePicker = React.createClass({
       return isVisible(value);
     }
 
-    return isVisible(value.start) || isVisible(value.end);
+    if (value) {
+      return isVisible(value.start) || isVisible(value.end);
+    }
+    return undefined;
   },
 
   canMoveBack() {
@@ -400,7 +404,7 @@ const DateRangePicker = React.createClass({
 
     if (this.canMoveBack()) {
       monthDate = this.getMonthDate();
-      monthDate.subtract(1, 'months');
+      monthDate.subtract(this.props.numberOfCalendars, 'months');
       this.setState(getYearMonth(monthDate));
     }
   },
@@ -417,7 +421,7 @@ const DateRangePicker = React.createClass({
 
     if (this.canMoveForward()) {
       monthDate = this.getMonthDate();
-      monthDate.add(1, 'months');
+      monthDate.add(this.props.numberOfCalendars, 'months');
       this.setState(getYearMonth(monthDate));
     }
   },
@@ -467,11 +471,8 @@ const DateRangePicker = React.createClass({
     let month = monthDate.month();
     let key = `${ index}-${ year }-${ month }`;
     let props;
-
-    monthDate.add(index, 'months');
-
-    let cal = new calendar.Calendar(firstOfWeek);
-    let monthDates = Immutable.fromJS(cal.monthDates(monthDate.year(), monthDate.month()));
+    monthDate = monthDate.add(index, 'months');
+    let monthDates = Immutable.fromJS(Calendar(monthDate));
     let monthStart = monthDates.first().first();
     let monthEnd = monthDates.last().last();
     let monthRange = moment.range(monthStart, monthEnd);
@@ -517,6 +518,9 @@ const DateRangePicker = React.createClass({
       dateRangesForDate: this.dateRangesForDate,
       dateComponent: CalendarDate,
       locale: this.props.locale,
+      showWeekNumber: this.props.showWeekNumber,
+      weekNumberLabel: this.props.weekNumberLabel,
+      disableSelect: this.props.disableSelect,
     };
 
     return <CalendarMonth {...props} />;
