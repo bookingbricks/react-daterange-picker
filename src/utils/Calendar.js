@@ -16,6 +16,5 @@ export default function calendar(momentDate) {
       week = [];
     }
   }
-  console.log(array);
   return array;
 }

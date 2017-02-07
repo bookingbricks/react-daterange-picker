@@ -46,6 +46,5 @@ function calendar(momentDate) {
     }
   }
 
-  console.log(array);
   return array;
 }
