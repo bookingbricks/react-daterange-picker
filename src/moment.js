@@ -1,5 +1,7 @@
-import moment from 'moment-timezone';
-import {} from 'moment-range';
-moment.tz.setDefault("Europe/Stockholm");
-moment.locale('sv');
+import Moment from 'moment-timezone';
+import { extendMoment } from 'moment-range';
+Moment.tz.setDefault("Europe/Stockholm");
+Moment.locale('sv');
+const moment = extendMoment(Moment);
+
 export default moment;

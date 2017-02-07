@@ -9,12 +9,13 @@ export default function calendar(momentDate) {
   );
   const array = [];
   let week = [];
-  range.by('day', (day) => {
+  for (const day of range.by('days')) {
     week.push(day);
     if (week.length === 7) {
       array.push(week);
       week = [];
     }
-  });
+  }
+  console.log(array);
   return array;
 }
