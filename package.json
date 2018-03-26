@@ -53,18 +53,19 @@
     "url": "https://github.com/onefinestay/react-daterange-picker"
   },
   "peerDependencies": {
-    "react": "^0.14.0 || 15.x.x",
-    "react-dom": "^0.14.0 || 15.x.x"
+    "react": "^16.2.0",
+    "react-dom": "^16.2.0"
   },
   "dependencies": {
     "calendar": "^0.1.0",
     "classnames": "^2.1.1",
+    "create-react-class": "^15.6.3",
     "immutable": "^3.7.2",
     "json-loader": "^0.5.4",
-    "moment": "^2.14.1",
-    "moment-range": "^2.0.3",
-    "moment-timezone": "^0.5.11",
-    "react-addons-pure-render-mixin": "^0.14.0 || 15.x.x"
+    "moment": "^2.21.0",
+    "moment-range": "^3.1.1",
+    "moment-timezone": "^0.5.14",
+    "react-addons-pure-render-mixin": "^15.6.2"
   },
   "devDependencies": {
     "babel-cli": "^6.14.0",
@@ -105,9 +106,10 @@
     "karma-webpack": "^1.7.0",
     "object.assign": "^4.0.4",
     "phantomjs": "^1.9.18",
-    "react": "^0.14.0 || 15.x.x",
-    "react-addons-test-utils": "^0.14.0 || 15.x.x",
-    "react-dom": "^0.14.0 || 15.x.x",
+    "prop-types": "^15.6.1",
+    "react": "^16.2.0",
+    "react-addons-test-utils": "^15.6.2",
+    "react-dom": "^16.2.0",
     "run-sequence": "~1.1.4",
     "timekeeper": "0.0.5",
     "transform-loader": "^0.2.1",

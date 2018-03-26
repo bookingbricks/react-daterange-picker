@@ -10,6 +10,14 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _createReactClass = require('create-react-class');
+
+var _createReactClass2 = _interopRequireDefault(_createReactClass);
+
 var _moment = require('../moment');
 
 var _moment2 = _interopRequireDefault(_moment);
@@ -42,26 +50,24 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
-var CalendarMonth = _react2.default.createClass({
-  displayName: 'CalendarMonth',
-
+var CalendarMonth = (0, _createReactClass2.default)({
   mixins: [_BemMixin2.default, _PureRenderMixin2.default],
 
   propTypes: {
-    dateComponent: _react2.default.PropTypes.func,
-    disableNavigation: _react2.default.PropTypes.bool,
+    dateComponent: _propTypes2.default.func,
+    disableNavigation: _propTypes2.default.bool,
     enabledRange: _CustomPropTypes2.default.momentRange,
     firstOfMonth: _CustomPropTypes2.default.moment,
-    firstOfWeek: _react2.default.PropTypes.oneOf([0, 1, 2, 3, 4, 5, 6]),
-    hideSelection: _react2.default.PropTypes.bool,
-    highlightedDate: _react2.default.PropTypes.object,
-    highlightedRange: _react2.default.PropTypes.object,
-    onMonthChange: _react2.default.PropTypes.func,
-    onYearChange: _react2.default.PropTypes.func,
+    firstOfWeek: _propTypes2.default.oneOf([0, 1, 2, 3, 4, 5, 6]),
+    hideSelection: _propTypes2.default.bool,
+    highlightedDate: _propTypes2.default.object,
+    highlightedRange: _propTypes2.default.object,
+    onMonthChange: _propTypes2.default.func,
+    onYearChange: _propTypes2.default.func,
     value: _CustomPropTypes2.default.momentOrMomentRange,
-    locale: _react2.default.PropTypes.string,
-    showWeekNumber: _react2.default.PropTypes.bool,
-    weekNumberLabel: _react2.default.PropTypes.string
+    locale: _propTypes2.default.string,
+    showWeekNumber: _propTypes2.default.bool,
+    weekNumberLabel: _propTypes2.default.string
   },
 
   setLocale: function setLocale(locale) {
