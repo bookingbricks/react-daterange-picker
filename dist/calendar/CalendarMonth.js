@@ -116,7 +116,7 @@ var CalendarMonth = (0, _createReactClass2.default)({
 
     return _react2.default.createElement(CalendarDate, _extends({
       key: i,
-      isToday: d.isSame((0, _moment2.default)(), 'day'),
+      isToday: d.isSame(_moment2.default.utc(), 'day'),
       isDisabled: !enabledRange.contains(d),
       isHighlightedDate: !!(highlightedDate && highlightedDate.isSame(d, 'day')),
       isHighlightedRangeStart: !!(highlightedRange && highlightedRange.start.isSame(d, 'day')),

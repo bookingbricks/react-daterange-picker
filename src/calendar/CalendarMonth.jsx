@@ -71,7 +71,7 @@ const CalendarMonth = createClass({
     return (
       <CalendarDate
         key={i}
-        isToday={d.isSame(moment(), 'day')}
+        isToday={d.isSame(moment.utc(), 'day')}
         isDisabled={!enabledRange.contains(d)}
         isHighlightedDate={!!(highlightedDate && highlightedDate.isSame(d, 'day'))}
         isHighlightedRangeStart={!!(highlightedRange && highlightedRange.start.isSame(d, 'day'))}

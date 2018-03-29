@@ -194,7 +194,7 @@ const CalendarDate = createClass({
     if (isHighlightedDate) {
       highlightModifier = 'single';
     }
-
+    console.log('date', date, numStates);
     if (numStates === 1) {
       // If there's only one state, it means we're not at a boundary
       color = states.getIn([0, 'color']);

@@ -22,8 +22,8 @@ describe('shallowEqual', function () {
   });
 
   it('returns false if a key matches to a moment object with different day values in objA and objB', function () {
-    var objA = {a: moment()};
-    var objB = {a: moment().add(2, 'days')};
+    var objA = {a: moment.utc()};
+    var objB = {a: moment.utc().add(2, 'days')};
     expect(shallowEqual(objA, objB)).toBe(false);
   });
 
@@ -51,13 +51,13 @@ describe('shallowEqual', function () {
     var range2 = moment.range(start, end);
     var obj = {};
     var objA = {
-      a: moment(),
+      a: moment.utc(),
       b: range1,
       c: obj,
       d: 'a',
     };
     var objB = {
-      a: moment(),
+      a: moment.utc(),
       b: range2,
       c: obj,
       d: 'a',

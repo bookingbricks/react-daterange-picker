@@ -16,7 +16,7 @@ describe('Localization', function () {
       props = _.extend({
         firstOfWeek: 0,
         firstOfMonth: this.firstOfMonth,
-        enabledRange: moment.range(moment(), moment().add(3, 'years')),
+        enabledRange: moment.range(moment.utc(), moment.utc().add(3, 'years')),
         dateComponent: CalendarDate,
         disableNavigation: false,
         dateRangesForDate: function () {
@@ -54,7 +54,7 @@ describe('Localization', function () {
       this.component = this.renderedComponent = TestUtils.renderIntoDocument(getCalendarMonth(props));
     };
 
-    this.firstOfMonth = moment();
+    this.firstOfMonth = moment.utc();
   });
 
   afterEach( function () {
@@ -72,7 +72,7 @@ describe('Localization', function () {
         locale: currLocale,
       });
 
-      const currentMonth = moment().format('MMMM');
+      const currentMonth = moment.utc().format('MMMM');
       const headerMonthLabel = this.container.props.children[0].props.children[0];
 
       expect(headerMonthLabel).toEqual(currentMonth);
@@ -107,7 +107,7 @@ describe('Localization', function () {
         locale: currLocale,
       });
 
-      const currentYear = moment().format('YYYY');
+      const currentYear = moment.utc().format('YYYY');
       const headerYearLabel = this.container.props.children[2].props.children[0];
 
       expect(headerYearLabel).toEqual(currentYear);
@@ -124,7 +124,7 @@ describe('Localization', function () {
       });
 
       const years = _.map(_.range(0, 4), (val) => {
-        return moment().add(val, 'y').format('YYYY');
+        return moment.utc().add(val, 'y').format('YYYY');
       });
       const headerYearSelect = this.container.props.children[2].props.children[1];
 

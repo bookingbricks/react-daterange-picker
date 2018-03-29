@@ -20,11 +20,11 @@ describe('isMomentRange', function () {
   });
 
   it('returns false is the end value is not a moment value', function () {
-    expect(isMomentRange({start: moment(), end: 'a'})).toBe(false);
+    expect(isMomentRange({start: moment.utc(), end: 'a'})).toBe(false);
   });
 
   it('return true otherwise', function () {
-    expect(isMomentRange({start: moment(), end: moment()})).toBe(true);
+    expect(isMomentRange({start: moment.utc(), end: moment.utc()})).toBe(true);
   });
 
 });
