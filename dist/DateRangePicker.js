@@ -8,6 +8,14 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _createReactClass = require('create-react-class');
+
+var _createReactClass2 = _interopRequireDefault(_createReactClass);
+
 var _moment = require('./moment');
 
 var _moment2 = _interopRequireDefault(_moment);
@@ -65,43 +73,42 @@ var absoluteMaximum = (0, _moment2.default)(new Date(8640000000000000 / 2)).star
 
 function noop() {}
 
-var DateRangePicker = _react2.default.createClass({
-  displayName: 'DateRangePicker',
-
+var DateRangePicker = (0, _createReactClass2.default)({
   mixins: [_BemMixin2.default, _reactAddonsPureRenderMixin2.default],
+  displayName: "DateRangePicker",
 
   propTypes: {
-    bemBlock: _react2.default.PropTypes.string,
-    bemNamespace: _react2.default.PropTypes.string,
-    className: _react2.default.PropTypes.string,
-    dateStates: _react2.default.PropTypes.array, // an array of date ranges and their states
-    defaultState: _react2.default.PropTypes.string,
-    disableNavigation: _react2.default.PropTypes.bool,
-    firstOfWeek: _react2.default.PropTypes.oneOf([0, 1, 2, 3, 4, 5, 6]),
-    helpMessage: _react2.default.PropTypes.string,
+    bemBlock: _propTypes2.default.string,
+    bemNamespace: _propTypes2.default.string,
+    className: _propTypes2.default.string,
+    dateStates: _propTypes2.default.array, // an array of date ranges and their states
+    defaultState: _propTypes2.default.string,
+    disableNavigation: _propTypes2.default.bool,
+    firstOfWeek: _propTypes2.default.oneOf([0, 1, 2, 3, 4, 5, 6]),
+    helpMessage: _propTypes2.default.string,
     initialDate: _CustomPropTypes2.default.moment,
-    initialFromValue: _react2.default.PropTypes.bool,
-    initialMonth: _react2.default.PropTypes.number, // Overrides values derived from initialDate/initialRange
-    initialRange: _react2.default.PropTypes.object,
-    initialYear: _react2.default.PropTypes.number, // Overrides values derived from initialDate/initialRange
-    locale: _react2.default.PropTypes.string,
+    initialFromValue: _propTypes2.default.bool,
+    initialMonth: _propTypes2.default.number, // Overrides values derived from initialDate/initialRange
+    initialRange: _propTypes2.default.object,
+    initialYear: _propTypes2.default.number, // Overrides values derived from initialDate/initialRange
+    locale: _propTypes2.default.string,
     maximumDate: _CustomPropTypes2.default.moment,
     minimumDate: _CustomPropTypes2.default.moment,
-    numberOfCalendars: _react2.default.PropTypes.number,
-    onHighlightDate: _react2.default.PropTypes.func, // triggered when a date is highlighted (hovered)
-    onHighlightRange: _react2.default.PropTypes.func, // triggered when a range is highlighted (hovered)
-    onSelect: _react2.default.PropTypes.func, // triggered when a date or range is selectec
-    onSelectStart: _react2.default.PropTypes.func, // triggered when the first date in a range is selected
-    paginationArrowComponent: _react2.default.PropTypes.func,
-    selectedLabel: _react2.default.PropTypes.string,
-    selectionType: _react2.default.PropTypes.oneOf(['single', 'range']),
-    singleDateRange: _react2.default.PropTypes.bool,
-    showLegend: _react2.default.PropTypes.bool,
-    stateDefinitions: _react2.default.PropTypes.object,
+    numberOfCalendars: _propTypes2.default.number,
+    onHighlightDate: _propTypes2.default.func, // triggered when a date is highlighted (hovered)
+    onHighlightRange: _propTypes2.default.func, // triggered when a range is highlighted (hovered)
+    onSelect: _propTypes2.default.func, // triggered when a date or range is selectec
+    onSelectStart: _propTypes2.default.func, // triggered when the first date in a range is selected
+    paginationArrowComponent: _propTypes2.default.func,
+    selectedLabel: _propTypes2.default.string,
+    selectionType: _propTypes2.default.oneOf(['single', 'range']),
+    singleDateRange: _propTypes2.default.bool,
+    showLegend: _propTypes2.default.bool,
+    stateDefinitions: _propTypes2.default.object,
     value: _CustomPropTypes2.default.momentOrMomentRange,
-    showWeekNumber: _react2.default.PropTypes.bool,
-    weekNumberLabel: _react2.default.PropTypes.string,
-    disableSelect: _react2.default.PropTypes.bool
+    showWeekNumber: _propTypes2.default.bool,
+    weekNumberLabel: _propTypes2.default.string,
+    disableSelect: _propTypes2.default.bool
   },
 
   getDefaultProps: function getDefaultProps() {
@@ -131,8 +138,7 @@ var DateRangePicker = _react2.default.createClass({
       dateStates: [],
       showLegend: false,
       onSelect: noop,
-      paginationArrowComponent: _PaginationArrow2.default,
-      timezone: (0, _moment2.default)().tz()
+      paginationArrowComponent: _PaginationArrow2.default
     };
   },
   componentWillReceiveProps: function componentWillReceiveProps(nextProps) {
