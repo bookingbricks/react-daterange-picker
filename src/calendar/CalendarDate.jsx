@@ -96,14 +96,6 @@ const CalendarDate = createClass({
     document.removeEventListener('touchend', this.touchEnd);
   },
 
-  touchStart(event) {
-    event.preventDefault();
-    this.setState({
-      mouseDown: true,
-    });
-    document.addEventListener('touchend', this.touchEnd);
-  },
-
   mouseEnter() {
     this.props.onHighlightDate(this.props.date);
   },
@@ -225,7 +217,6 @@ const CalendarDate = createClass({
     return (
       <td className={this.cx({element: 'Date', modifiers: bemModifiers, states: bemStates})}
         style={cellStyle}
-        onTouchStart={!disableSelect && this.touchStart}
         onMouseEnter={!disableSelect && this.mouseEnter}
         onMouseLeave={!disableSelect && this.mouseLeave}
         onMouseDown={!disableSelect && this.mouseDown}>
