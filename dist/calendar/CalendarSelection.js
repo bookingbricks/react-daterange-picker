@@ -8,6 +8,14 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _createReactClass = require('create-react-class');
+
+var _createReactClass2 = _interopRequireDefault(_createReactClass);
+
 var _BemMixin = require('../utils/BemMixin');
 
 var _BemMixin2 = _interopRequireDefault(_BemMixin);
@@ -20,14 +28,13 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
-var CalendarSelection = _react2.default.createClass({
-  displayName: 'CalendarSelection',
-
+var CalendarSelection = (0, _createReactClass2.default)({
   mixins: [_BemMixin2.default, _PureRenderMixin2.default],
+  displayName: "CalendarSelection",
 
   propTypes: {
-    modifier: _react2.default.PropTypes.string,
-    pending: _react2.default.PropTypes.bool.isRequired
+    modifier: _propTypes2.default.string,
+    pending: _propTypes2.default.bool.isRequired
   },
 
   render: function render() {

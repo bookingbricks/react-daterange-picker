@@ -17,7 +17,7 @@ describe('The CalendarMonth Component', function () {
       props = _.extend({
         firstOfWeek: 0,
         firstOfMonth: this.firstOfMonth,
-        enabledRange: moment.range(moment(), moment().add(3, 'years')),
+        enabledRange: moment.range(moment.utc(), moment.utc().add(3, 'years')),
         dateComponent: CalendarDate,
         disableNavigation: false,
         dateRangesForDate: function () {
@@ -55,7 +55,7 @@ describe('The CalendarMonth Component', function () {
       this.component = this.renderedComponent = TestUtils.renderIntoDocument(getCalendarMonth(props));
     };
 
-    this.firstOfMonth = moment();
+    this.firstOfMonth = moment.utc();
   });
 
   afterEach( function () {

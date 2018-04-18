@@ -10,6 +10,14 @@ var _react = require('react');
 
 var _react2 = _interopRequireDefault(_react);
 
+var _propTypes = require('prop-types');
+
+var _propTypes2 = _interopRequireDefault(_propTypes);
+
+var _createReactClass = require('create-react-class');
+
+var _createReactClass2 = _interopRequireDefault(_createReactClass);
+
 var _BemMixin = require('./utils/BemMixin');
 
 var _BemMixin2 = _interopRequireDefault(_BemMixin);
@@ -24,15 +32,14 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 function _objectWithoutProperties(obj, keys) { var target = {}; for (var i in obj) { if (keys.indexOf(i) >= 0) continue; if (!Object.prototype.hasOwnProperty.call(obj, i)) continue; target[i] = obj[i]; } return target; }
 
-var PaginationArrow = _react2.default.createClass({
-  displayName: 'PaginationArrow',
-
+var PaginationArrow = (0, _createReactClass2.default)({
   mixins: [_BemMixin2.default, _reactAddonsPureRenderMixin2.default],
+  displayName: "PaginationArrow",
 
   propTypes: {
-    disabled: _react2.default.PropTypes.bool,
-    onTrigger: _react2.default.PropTypes.func,
-    direction: _react2.default.PropTypes.oneOf(['next', 'previous'])
+    disabled: _propTypes2.default.bool,
+    onTrigger: _propTypes2.default.func,
+    direction: _propTypes2.default.oneOf(['next', 'previous'])
   },
 
   getDefaultProps: function getDefaultProps() {
