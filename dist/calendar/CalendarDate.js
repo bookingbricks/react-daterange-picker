@@ -127,13 +127,6 @@ var CalendarDate = (0, _createReactClass2.default)({
     }
     document.removeEventListener('touchend', this.touchEnd);
   },
-  touchStart: function touchStart(event) {
-    event.preventDefault();
-    this.setState({
-      mouseDown: true
-    });
-    document.addEventListener('touchend', this.touchEnd);
-  },
   mouseEnter: function mouseEnter() {
     this.props.onHighlightDate(this.props.date);
   },
@@ -255,7 +248,6 @@ var CalendarDate = (0, _createReactClass2.default)({
       'td',
       { className: this.cx({ element: 'Date', modifiers: bemModifiers, states: bemStates }),
         style: cellStyle,
-        onTouchStart: !disableSelect && this.touchStart,
         onMouseEnter: !disableSelect && this.mouseEnter,
         onMouseLeave: !disableSelect && this.mouseLeave,
         onMouseDown: !disableSelect && this.mouseDown },
