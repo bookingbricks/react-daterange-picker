@@ -225,10 +225,10 @@ const CalendarDate = createClass({
     return (
       <td className={this.cx({element: 'Date', modifiers: bemModifiers, states: bemStates})}
         style={cellStyle}
-        onTouchStart={!disableSelect && this.touchStart}
-        onMouseEnter={!disableSelect && this.mouseEnter}
-        onMouseLeave={!disableSelect && this.mouseLeave}
-        onMouseDown={!disableSelect && this.mouseDown}>
+        onTouchStart={disableSelect ? null : this.touchStart}
+        onMouseEnter={disableSelect ? null : this.mouseEnter}
+        onMouseLeave={disableSelect ? null : this.mouseLeave}
+        onMouseDown={disableSelect ? null : this.mouseDown}>
         {numStates > 1 &&
           <div className={this.cx({element: "HalfDateStates"})}>
             <CalendarDatePeriod period="am" color={amColor} />
