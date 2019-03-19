@@ -71,7 +71,7 @@ const CalendarMonth = createClass({
     return (
       <CalendarDate
         key={i}
-        isToday={d.isSame(moment.utc(), 'day')}
+        isToday={d.isSame(moment(), 'day')}
         isDisabled={!enabledRange.contains(d)}
         isHighlightedDate={!!(highlightedDate && highlightedDate.isSame(d, 'day'))}
         isHighlightedRangeStart={!!(highlightedRange && highlightedRange.start.isSame(d, 'day'))}
@@ -116,7 +116,7 @@ const CalendarMonth = createClass({
 
     return (
       <tr className={this.cx({element: 'Weekdays'})}>
-        {(showWeekNumber) ? <th style={style} className={this.cx({element: 'WeekdayHeading'})} scope="col"><abbr></abbr></th> : null}
+        {(showWeekNumber) ? <th style={style} className={this.cx({element: 'WeekdayHeading'})} scope="col"><abbr/></th> : null}
         {headers.toJS()}
       </tr>
     );
@@ -200,7 +200,7 @@ const CalendarMonth = createClass({
   },
 
   render() {
-    let {firstOfWeek, firstOfMonth} = this.props;
+    let { firstOfMonth } = this.props;
 
     let monthDates = Immutable.fromJS(Calendar(firstOfMonth));
     let weeks = monthDates.map(this.renderWeek);

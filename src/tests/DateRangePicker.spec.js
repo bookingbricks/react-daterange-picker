@@ -363,7 +363,7 @@ describe('The DateRangePicker component', function () {
       it('onSelectDate calls #onSelectDate', function () {
         this.useDocumentRenderer();
         var calendarMonthComponent = TestUtils.scryRenderedComponentsWithType(this.renderedComponent, CalendarMonth)[0];
-        calendarMonthComponent.props.onSelectDate(moment.utc());
+        calendarMonthComponent.props.onSelectDate(moment());
         expect(this.renderedComponent.state.selectedStartDate).toBeDefined();
 
       });
@@ -371,15 +371,15 @@ describe('The DateRangePicker component', function () {
       it('onHighlightDate calls #onHighlightDate', function () {
         this.useDocumentRenderer();
         var calendarMonthComponent = TestUtils.scryRenderedComponentsWithType(this.renderedComponent, CalendarMonth)[0];
-        calendarMonthComponent.props.onHighlightDate(moment.utc());
+        calendarMonthComponent.props.onHighlightDate(moment());
         expect(this.renderedComponent.state.highlightedDate).toBeDefined();
       });
 
       it('onUnHighlightDate calls #onUnHighlightDate', function () {
         this.useDocumentRenderer();
         var calendarMonthComponent = TestUtils.scryRenderedComponentsWithType(this.renderedComponent, CalendarMonth)[0];
-        calendarMonthComponent.props.onHighlightDate(moment.utc());
-        calendarMonthComponent.props.onUnHighlightDate(moment.utc());
+        calendarMonthComponent.props.onHighlightDate(moment());
+        calendarMonthComponent.props.onUnHighlightDate(moment());
         expect(this.renderedComponent.state.highlightedDate).toBe(null);
       });
 
@@ -599,9 +599,9 @@ describe('The DateRangePicker component', function () {
             spyOn(this.renderedComponent, 'sanitizeRange').and.returnValue(range);
             spyOn(this.renderedComponent, 'highlightRange');
             this.renderedComponent.setState({
-              selectedStartDate: moment.utc(),
+              selectedStartDate: moment(),
             });
-            this.renderedComponent.onHighlightDate(moment.utc());
+            this.renderedComponent.onHighlightDate(moment());
             expect(this.renderedComponent.highlightRange).toHaveBeenCalledWith(range);
           });
 
@@ -645,7 +645,7 @@ describe('The DateRangePicker component', function () {
           initialMonth: 6,
         });
         this.renderedComponent.setState({
-          highlightedDate: moment.utc(),
+          highlightedDate: moment(),
         });
         this.renderedComponent.onUnHighlightDate();
         expect(this.renderedComponent.state.highlightedDate).toBe(null);
@@ -966,7 +966,7 @@ describe('The DateRangePicker component', function () {
     describe('if state.highlightedDate is defined', function () {
 
       beforeEach( function () {
-        this.highlightedDate = moment.utc();
+        this.highlightedDate = moment();
         this.renderedComponent.setState({
           highlightedDate: this.highlightedDate,
           hideSelection: true,
@@ -989,7 +989,7 @@ describe('The DateRangePicker component', function () {
     describe('if state.highlightedDate is not defined', function () {
 
       beforeEach( function () {
-        this.highlightedDate = moment.utc();
+        this.highlightedDate = moment();
         this.renderedComponent.setState({
           hideSelection: true,
         });
@@ -1026,7 +1026,7 @@ describe('The DateRangePicker component', function () {
             moment(new Date(2005, 1, 1)),
             moment(new Date(2006, 1, 1))
           );
-          this.highlightedDate = moment.utc();
+          this.highlightedDate = moment();
           this.renderedComponent.setState({
             highlightedRange: this.highlightedRange,
             selectedStartDate: this.selectedStartDate,
@@ -1064,7 +1064,7 @@ describe('The DateRangePicker component', function () {
             moment(new Date(2005, 1, 1)),
             moment(new Date(2005, 1, 1))
           );
-          this.highlightedDate = moment.utc();
+          this.highlightedDate = moment();
           this.renderedComponent.setState({
             highlightedRange: this.highlightedRange,
             selectedStartDate: this.selectedStartDate,
@@ -1102,7 +1102,7 @@ describe('The DateRangePicker component', function () {
             moment(new Date(2005, 1, 1)),
             moment(new Date(2005, 1, 1))
           );
-          this.highlightedDate = moment.utc();
+          this.highlightedDate = moment();
           this.renderedComponent.setState({
             highlightedRange: this.highlightedRange,
             selectedStartDate: this.selectedStartDate,
@@ -1137,7 +1137,7 @@ describe('The DateRangePicker component', function () {
           initialMonth: 6,
           onSelect: this.selectSpy,
         });
-        this.highlightedDate = moment.utc();
+        this.highlightedDate = moment();
         this.renderedComponent.setState({
           selectedStartDate: this.selectedStartDate,
           highlightedDate: this.selectedStartDate,

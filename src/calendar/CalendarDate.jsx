@@ -42,6 +42,8 @@ const CalendarDate = createClass({
     onHighlightDate: PropTypes.func,
     onUnHighlightDate: PropTypes.func,
     onSelectDate: PropTypes.func,
+
+    disableSelect: PropTypes.bool,
   },
 
   getInitialState() {

@@ -73,9 +73,9 @@ const DateRangePicker = createClass({
       disableNavigation: false,
       nextLabel: '',
       previousLabel: '',
-      initialDate: moment.utc(),
+      initialDate: moment(),
       initialFromValue: true,
-      locale: moment.utc().locale(),
+      locale: moment().locale(),
       selectionType: 'range',
       singleDateRange: false,
       stateDefinitions: {
@@ -121,7 +121,7 @@ const DateRangePicker = createClass({
   },
 
   getInitialState() {
-    let now = moment.utc();
+    let now = moment();
     let {initialYear, initialMonth, initialFromValue, value} = this.props;
     let year = now.year();
     let month = now.month();
@@ -370,7 +370,7 @@ const DateRangePicker = createClass({
   },
 
   getMonthDate() {
-    return moment.utc().year(this.state.year).month(this.state.month).startOf('month');
+    return moment().year(this.state.year).month(this.state.month).startOf('month');
   },
 
   isStartOrEndVisible(props) {

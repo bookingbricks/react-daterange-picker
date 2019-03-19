@@ -77,7 +77,9 @@ var CalendarDate = (0, _createReactClass2.default)({
     dateRangesForDate: _propTypes2.default.func,
     onHighlightDate: _propTypes2.default.func,
     onUnHighlightDate: _propTypes2.default.func,
-    onSelectDate: _propTypes2.default.func
+    onSelectDate: _propTypes2.default.func,
+
+    disableSelect: _propTypes2.default.bool
   },
 
   getInitialState: function getInitialState() {

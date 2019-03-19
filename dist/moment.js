@@ -4,14 +4,16 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 
-var _moment = require('moment');
+var _momentTimezone = require('moment-timezone');
 
-var _moment2 = _interopRequireDefault(_moment);
+var _momentTimezone2 = _interopRequireDefault(_momentTimezone);
 
 var _momentRange = require('moment-range');
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-_moment2.default.locale('sv');
+_momentTimezone2.default.tz.setDefault("Europe/Stockholm");
+_momentTimezone2.default.locale('sv');
+var moment = (0, _momentRange.extendMoment)(_momentTimezone2.default);
 
-exports.default = (0, _momentRange.extendMoment)(_moment2.default);
+exports.default = moment;

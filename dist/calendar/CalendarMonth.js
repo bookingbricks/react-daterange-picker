@@ -116,7 +116,7 @@ var CalendarMonth = (0, _createReactClass2.default)({
 
     return _react2.default.createElement(CalendarDate, _extends({
       key: i,
-      isToday: d.isSame(_moment2.default.utc(), 'day'),
+      isToday: d.isSame((0, _moment2.default)(), 'day'),
       isDisabled: !enabledRange.contains(d),
       isHighlightedDate: !!(highlightedDate && highlightedDate.isSame(d, 'day')),
       isHighlightedRangeStart: !!(highlightedRange && highlightedRange.start.isSame(d, 'day')),
@@ -277,9 +277,7 @@ var CalendarMonth = (0, _createReactClass2.default)({
     );
   },
   render: function render() {
-    var _props5 = this.props,
-        firstOfWeek = _props5.firstOfWeek,
-        firstOfMonth = _props5.firstOfMonth;
+    var firstOfMonth = this.props.firstOfMonth;
 
 
     var monthDates = _immutable2.default.fromJS((0, _Calendar2.default)(firstOfMonth));

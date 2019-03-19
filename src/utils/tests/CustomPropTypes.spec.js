@@ -8,7 +8,7 @@ describe('CustomPropTypes', function () {
   beforeEach( function () {
     this.props = {
       'att-string': 'val1',
-      'att-moment': moment.utc(),
+      'att-moment': moment(),
       'att-moment-range': moment.range(),
     };
   });

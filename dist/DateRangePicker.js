@@ -121,9 +121,9 @@ var DateRangePicker = (0, _createReactClass2.default)({
       disableNavigation: false,
       nextLabel: '',
       previousLabel: '',
-      initialDate: _moment2.default.utc(),
+      initialDate: (0, _moment2.default)(),
       initialFromValue: true,
-      locale: _moment2.default.utc().locale(),
+      locale: (0, _moment2.default)().locale(),
       selectionType: 'range',
       singleDateRange: false,
       stateDefinitions: {
@@ -167,7 +167,7 @@ var DateRangePicker = (0, _createReactClass2.default)({
     this.setState(updatedState);
   },
   getInitialState: function getInitialState() {
-    var now = _moment2.default.utc();
+    var now = (0, _moment2.default)();
     var _props = this.props,
         initialYear = _props.initialYear,
         initialMonth = _props.initialMonth,
@@ -422,7 +422,7 @@ var DateRangePicker = (0, _createReactClass2.default)({
     }
   },
   getMonthDate: function getMonthDate() {
-    return _moment2.default.utc().year(this.state.year).month(this.state.month).startOf('month');
+    return (0, _moment2.default)().year(this.state.year).month(this.state.month).startOf('month');
   },
   isStartOrEndVisible: function isStartOrEndVisible(props) {
     var _this = this;
