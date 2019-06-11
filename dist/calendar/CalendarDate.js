@@ -16,9 +16,9 @@ var _createReactClass = require('create-react-class');
 
 var _createReactClass2 = _interopRequireDefault(_createReactClass);
 
-var _immutable = require('immutable');
+var _immutableMin = require('immutable/dist/immutable.min.js');
 
-var _immutable2 = _interopRequireDefault(_immutable);
+var _immutableMin2 = _interopRequireDefault(_immutableMin);
 
 var _BemMixin = require('../utils/BemMixin');
 
@@ -70,7 +70,7 @@ var CalendarDate = (0, _createReactClass2.default)({
     isInHighlightedRange: _propTypes2.default.bool,
 
     highlightedDate: _propTypes2.default.object,
-    dateStates: _propTypes2.default.instanceOf(_immutable2.default.List),
+    dateStates: _propTypes2.default.instanceOf(_immutableMin2.default.List),
     isDisabled: _propTypes2.default.bool,
     isToday: _propTypes2.default.bool,
 

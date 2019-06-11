@@ -22,9 +22,9 @@ var _moment = require('../moment');
 
 var _moment2 = _interopRequireDefault(_moment);
 
-var _immutable = require('immutable');
+var _immutableMin = require('immutable/dist/immutable.min.js');
 
-var _immutable2 = _interopRequireDefault(_immutable);
+var _immutableMin2 = _interopRequireDefault(_immutableMin);
 
 var _BemMixin = require('../utils/BemMixin');
 
@@ -73,8 +73,8 @@ var CalendarMonth = (0, _createReactClass2.default)({
 
   setLocale: function setLocale(locale) {
     _moment2.default.locale(locale);
-    this.WEEKDAYS = _immutable2.default.List(_moment2.default.weekdays()).zip(_immutable2.default.List(_moment2.default.weekdaysShort()));
-    this.MONTHS = _immutable2.default.List(_moment2.default.months());
+    this.WEEKDAYS = _immutableMin2.default.List(_moment2.default.weekdays()).zip(_immutableMin2.default.List(_moment2.default.weekdaysShort()));
+    this.MONTHS = _immutableMin2.default.List(_moment2.default.months());
   },
   componentWillMount: function componentWillMount() {
     var locale = this.props.locale;
@@ -158,7 +158,7 @@ var CalendarMonth = (0, _createReactClass2.default)({
         firstOfWeek = _props3.firstOfWeek,
         showWeekNumber = _props3.showWeekNumber;
 
-    var indices = _immutable2.default.Range(firstOfWeek, 7).concat(_immutable2.default.Range(0, firstOfWeek));
+    var indices = _immutableMin2.default.Range(firstOfWeek, 7).concat(_immutableMin2.default.Range(0, firstOfWeek));
 
     var style = showWeekNumber ? { width: '12.5%' } : null;
 
@@ -211,7 +211,7 @@ var CalendarMonth = (0, _createReactClass2.default)({
     var firstOfMonth = this.props.firstOfMonth;
 
     var y = firstOfMonth.year();
-    var years = _immutable2.default.Range(y - 5, y).concat(_immutable2.default.Range(y, y + 10));
+    var years = _immutableMin2.default.Range(y - 5, y).concat(_immutableMin2.default.Range(y, y + 10));
     var choices = years.map(this.renderYearChoice);
     var modifiers = { year: true };
     return _react2.default.createElement(
@@ -280,7 +280,7 @@ var CalendarMonth = (0, _createReactClass2.default)({
     var firstOfMonth = this.props.firstOfMonth;
 
 
-    var monthDates = _immutable2.default.fromJS((0, _Calendar2.default)(firstOfMonth));
+    var monthDates = _immutableMin2.default.fromJS((0, _Calendar2.default)(firstOfMonth));
     var weeks = monthDates.map(this.renderWeek);
 
     return _react2.default.createElement(

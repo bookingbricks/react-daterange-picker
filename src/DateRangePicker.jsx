@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import createClass from 'create-react-class';
 import moment from './moment';
-import Immutable from 'immutable';
+import Immutable from 'immutable/dist/immutable.min.js';
 
 import BemMixin from './utils/BemMixin';
 import CustomPropTypes from './utils/CustomPropTypes';

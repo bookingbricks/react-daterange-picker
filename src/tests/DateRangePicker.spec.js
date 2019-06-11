@@ -7,7 +7,7 @@ import moment from 'moment';
 import 'moment-range';
 import isMomentRange from '../utils/isMomentRange';
 import areMomentRangesEqual from '../utils/areMomentRangesEqual';
-import Immutable from 'immutable';
+import Immutable from 'immutable/dist/immutable.min.js';
 import React from 'react';
 import ReactDOM from 'react-dom';
 import TestUtils from 'react-addons-test-utils';

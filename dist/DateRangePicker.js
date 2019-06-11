@@ -20,9 +20,9 @@ var _moment = require('./moment');
 
 var _moment2 = _interopRequireDefault(_moment);
 
-var _immutable = require('immutable');
+var _immutableMin = require('immutable/dist/immutable.min.js');
 
-var _immutable2 = _interopRequireDefault(_immutable);
+var _immutableMin2 = _interopRequireDefault(_immutableMin);
 
 var _BemMixin = require('./utils/BemMixin');
 
@@ -148,7 +148,7 @@ var DateRangePicker = (0, _createReactClass2.default)({
     var updatedState = {
       selectedStartDate: null,
       hideSelection: false,
-      dateStates: this.state.dateStates && _immutable2.default.is(this.state.dateStates, nextDateStates) ? this.state.dateStates : nextDateStates,
+      dateStates: this.state.dateStates && _immutableMin2.default.is(this.state.dateStates, nextDateStates) ? this.state.dateStates : nextDateStates,
       enabledRange: this.state.enabledRange && this.state.enabledRange.isSame(nextEnabledRange) ? this.state.enabledRange : nextEnabledRange
     };
 
@@ -215,7 +215,7 @@ var DateRangePicker = (0, _createReactClass2.default)({
     var maxDate = absoluteMaximum;
     var dateCursor = (0, _moment2.default)(minDate).startOf('day');
 
-    var defs = _immutable2.default.fromJS(stateDefinitions);
+    var defs = _immutableMin2.default.fromJS(stateDefinitions);
 
     dateStates.forEach(function (s) {
       var r = s.range;
@@ -238,9 +238,9 @@ var DateRangePicker = (0, _createReactClass2.default)({
     });
 
     // sanitize date states
-    return _immutable2.default.List(actualStates).map(function (s) {
+    return _immutableMin2.default.List(actualStates).map(function (s) {
       var def = defs.get(s.state);
-      return _immutable2.default.Map({
+      return _immutableMin2.default.Map({
         range: s.range,
         state: s.state,
         selectable: def.get('selectable', true),
@@ -348,7 +348,7 @@ var DateRangePicker = (0, _createReactClass2.default)({
 
     if (selectionType === 'range') {
       if (selectedStartDate) {
-        datePair = _immutable2.default.List.of(selectedStartDate, date).sortBy(function (d) {
+        datePair = _immutableMin2.default.List.of(selectedStartDate, date).sortBy(function (d) {
           return d.unix();
         });
         range = _moment2.default.range(datePair.get(0), datePair.get(1));
@@ -524,7 +524,7 @@ var DateRangePicker = (0, _createReactClass2.default)({
     var key = index + '-' + year + '-' + month;
     var props = void 0;
     monthDate = monthDate.add(index, 'months');
-    var monthDates = _immutable2.default.fromJS((0, _Calendar2.default)(monthDate));
+    var monthDates = _immutableMin2.default.fromJS((0, _Calendar2.default)(monthDate));
     var monthStart = monthDates.first().first();
     var monthEnd = monthDates.last().last();
     var monthRange = _moment2.default.range(monthStart, monthEnd);
@@ -590,7 +590,7 @@ var DateRangePicker = (0, _createReactClass2.default)({
         helpMessage = _props3.helpMessage;
 
 
-    var calendars = _immutable2.default.Range(0, numberOfCalendars).map(this.renderCalendar);
+    var calendars = _immutableMin2.default.Range(0, numberOfCalendars).map(this.renderCalendar);
     className = this.cx({ element: null }) + ' ' + className;
 
     return _react2.default.createElement(
