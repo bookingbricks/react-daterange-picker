@@ -115,6 +115,7 @@ var CalendarDate = (0, _createReactClass2.default)({
     document.addEventListener('mouseup', this.mouseUp);
   },
   touchEnd: function touchEnd() {
+    event.preventDefault();
     this.props.onHighlightDate(this.props.date);
     this.props.onSelectDate(this.props.date);
 
