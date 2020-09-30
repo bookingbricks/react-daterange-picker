@@ -7,16 +7,16 @@ import BemMixin from './utils/BemMixin';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 
-const getItems = (props) => {
-  const source = props.customStateDefinitions || props.stateDefinitions;
+const getItems = (that) => {
+  const source = that.props.customStateDefinitions || that.props.stateDefinitions;
 
   return Object.keys(source).map((key) => {
     const { label, color } = source[key];
 
     return (
-      <li className={this.cx({element: 'LegendItem'})} key={key}>
-        <span className={this.cx({element: 'LegendItemColor'})} style={{ backgroundColor: color }} />
-        <span className={this.cx({element: 'LegendItemLabel'})}>{label}</span>
+      <li className={that.cx({element: 'LegendItem'})} key={key}>
+        <span className={that.cx({element: 'LegendItemColor'})} style={{ backgroundColor: color }} />
+        <span className={that.cx({element: 'LegendItemLabel'})}>{label}</span>
       </li>
     );
   });
@@ -35,7 +35,7 @@ const Legend = createClass({
 
   render() {
     let { selectedLabel } = this.props;
-    const items = getItems(this.props);
+    const items = getItems(this);
 
     return (
       <ul className={this.cx()}>

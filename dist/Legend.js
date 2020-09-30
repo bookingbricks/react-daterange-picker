@@ -26,8 +26,8 @@ var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRender
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-var getItems = function getItems(props) {
-  var source = props.customStateDefinitions || props.stateDefinitions;
+var getItems = function getItems(that) {
+  var source = that.props.customStateDefinitions || that.props.stateDefinitions;
 
   return Object.keys(source).map(function (key) {
     var _source$key = source[key],
@@ -37,11 +37,11 @@ var getItems = function getItems(props) {
 
     return _react2.default.createElement(
       'li',
-      { className: undefined.cx({ element: 'LegendItem' }), key: key },
-      _react2.default.createElement('span', { className: undefined.cx({ element: 'LegendItemColor' }), style: { backgroundColor: color } }),
+      { className: that.cx({ element: 'LegendItem' }), key: key },
+      _react2.default.createElement('span', { className: that.cx({ element: 'LegendItemColor' }), style: { backgroundColor: color } }),
       _react2.default.createElement(
         'span',
-        { className: undefined.cx({ element: 'LegendItemLabel' }) },
+        { className: that.cx({ element: 'LegendItemLabel' }) },
         label
       )
     );
@@ -61,7 +61,7 @@ var Legend = (0, _createReactClass2.default)({
   render: function render() {
     var selectedLabel = this.props.selectedLabel;
 
-    var items = getItems(this.props);
+    var items = getItems(this);
 
     return _react2.default.createElement(
       'ul',
