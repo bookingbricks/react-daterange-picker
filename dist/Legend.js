@@ -26,43 +26,42 @@ var _reactAddonsPureRenderMixin2 = _interopRequireDefault(_reactAddonsPureRender
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
+var getItems = function getItems(props) {
+  var source = props.customStateDefinitions || props.stateDefinitions;
+
+  return Object.keys(source).map(function (key) {
+    var _source$key = source[key],
+        label = _source$key.label,
+        color = _source$key.color;
+
+
+    return _react2.default.createElement(
+      'li',
+      { className: undefined.cx({ element: 'LegendItem' }), key: key },
+      _react2.default.createElement('span', { className: undefined.cx({ element: 'LegendItemColor' }), style: { backgroundColor: color } }),
+      _react2.default.createElement(
+        'span',
+        { className: undefined.cx({ element: 'LegendItemLabel' }) },
+        label
+      )
+    );
+  });
+};
+
 var Legend = (0, _createReactClass2.default)({
   mixins: [_BemMixin2.default, _reactAddonsPureRenderMixin2.default],
   displayName: "Legend",
 
   propTypes: {
     selectedLabel: _propTypes2.default.string.isRequired,
-    stateDefinitions: _propTypes2.default.object.isRequired
+    stateDefinitions: _propTypes2.default.object.isRequired,
+    customStateDefinitions: _propTypes2.default.object
   },
 
   render: function render() {
-    var _props = this.props,
-        selectedLabel = _props.selectedLabel,
-        stateDefinitions = _props.stateDefinitions;
+    var selectedLabel = this.props.selectedLabel;
 
-    var items = [];
-    var name = void 0;
-    var def = void 0;
-    var style = void 0;
-
-    for (name in stateDefinitions) {
-      def = stateDefinitions[name];
-      if (def.label && def.color) {
-        style = {
-          backgroundColor: def.color
-        };
-        items.push(_react2.default.createElement(
-          'li',
-          { className: this.cx({ element: 'LegendItem' }), key: name },
-          _react2.default.createElement('span', { className: this.cx({ element: 'LegendItemColor' }), style: style }),
-          _react2.default.createElement(
-            'span',
-            { className: this.cx({ element: 'LegendItemLabel' }) },
-            def.label
-          )
-        ));
-      }
-    }
+    var items = getItems(this.props);
 
     return _react2.default.createElement(
       'ul',

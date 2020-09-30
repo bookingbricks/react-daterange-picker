@@ -7,6 +7,22 @@ import BemMixin from './utils/BemMixin';
 import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 
+const getItems = (props) => {
+  const source = props.customStateDefinitions || props.stateDefinitions;
+
+  return Object.keys(source).map((key) => {
+    const { label, color } = source[key];
+
+    return (
+      <li className={this.cx({element: 'LegendItem'})} key={key}>
+        <span className={this.cx({element: 'LegendItemColor'})} style={{ backgroundColor: color }} />
+        <span className={this.cx({element: 'LegendItemLabel'})}>{label}</span>
+      </li>
+    );
+  });
+};
+
+
 const Legend = createClass({
   mixins: [BemMixin, PureRenderMixin],
   displayName: "Legend",
@@ -14,29 +30,12 @@ const Legend = createClass({
   propTypes: {
     selectedLabel: PropTypes.string.isRequired,
     stateDefinitions: PropTypes.object.isRequired,
+    customStateDefinitions: PropTypes.object,
   },
 
   render() {
-    let {selectedLabel, stateDefinitions} = this.props;
-    let items = [];
-    let name;
-    let def;
-    let style;
-
-    for (name in stateDefinitions) {
-      def = stateDefinitions[name];
-      if (def.label && def.color) {
-        style = {
-          backgroundColor: def.color,
-        };
-        items.push(
-          <li className={this.cx({element: 'LegendItem'})} key={name}>
-            <span className={this.cx({element: 'LegendItemColor'})} style={style} />
-            <span className={this.cx({element: 'LegendItemLabel'})}>{def.label}</span>
-          </li>
-        );
-      }
-    }
+    let { selectedLabel } = this.props;
+    const items = getItems(this.props);
 
     return (
       <ul className={this.cx()}>
