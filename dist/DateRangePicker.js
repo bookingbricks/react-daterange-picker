@@ -585,6 +585,7 @@ var DateRangePicker = (0, _createReactClass2.default)({
         className = _props3.className,
         numberOfCalendars = _props3.numberOfCalendars,
         stateDefinitions = _props3.stateDefinitions,
+        customStateDefinitions = _props3.customStateDefinitions,
         selectedLabel = _props3.selectedLabel,
         showLegend = _props3.showLegend,
         helpMessage = _props3.helpMessage;
@@ -604,7 +605,7 @@ var DateRangePicker = (0, _createReactClass2.default)({
         { className: this.cx({ element: 'HelpMessage' }) },
         helpMessage
       ) : null,
-      showLegend ? _react2.default.createElement(_Legend2.default, { stateDefinitions: stateDefinitions, selectedLabel: selectedLabel }) : null
+      showLegend ? _react2.default.createElement(_Legend2.default, { customStateDefinitions: customStateDefinitions, stateDefinitions: stateDefinitions, selectedLabel: selectedLabel }) : null
     );
   }
 });
